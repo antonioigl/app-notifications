@@ -13,7 +13,7 @@
                                 <select name="recipient_id" class="form-control">
                                     <option value="">Selecciona el usuario</option>
                                     @foreach($users as $user)
-                                        <option value="{{old($user->id)}}">{{$user->name}}</option>
+                                        <option value="{{$user->id}}">{{$user->name}}</option>
                                     @endforeach
                                 </select>
                             </div>

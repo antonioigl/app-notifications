@@ -29,15 +29,4 @@ class HomeController extends Controller
         return view('home')->with(compact('users'));
     }
 
-    public function store(Request $request)
-    {
-       Message::create([
-           'sender_id' => auth()->id(),
-           'recipient_id' => $request->recipient_id,
-           'body' => $request->body,
-       ]);
-
-       return back()->with('flash', 'Tu mensaje fue enviado');
-
-    }
 }

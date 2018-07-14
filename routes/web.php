@@ -20,6 +20,7 @@ Auth::routes();
 Route::middleware(['auth'])->group(function () {
 
     Route::get('/home', 'HomeController@index')->name('home');
-    Route::post('/messages', 'HomeController@store')->name('messages.store');
+    Route::get('/messages', 'MessageController@index')->name('messages.index');
+    Route::post('/messages', 'MessageController@store')->name('messages.store');
 
 });
