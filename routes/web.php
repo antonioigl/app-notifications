@@ -11,6 +11,8 @@
 |
 */
 
+use Yajra\DataTables\DataTables;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -22,5 +24,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/messages', 'MessageController@index')->name('messages.index');
     Route::post('/messages', 'MessageController@store')->name('messages.store');
+    Route::put('/messages', 'MessageController@update')->name('messages.update');
 
 });

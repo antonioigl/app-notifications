@@ -8,6 +8,10 @@ class Message extends Model
 {
     protected $fillable = ['sender_id', 'recipient_id', 'body'];
 
+    protected $casts = [
+        'read' => 'boolean'
+    ];
+
     // A message belongs to a sender
     public function sender()
     {
