@@ -30,8 +30,8 @@ class MessageController extends Controller
             return back()->with('flash', 'No has seleccionado ningún mensaje');
         }
         //else
-
-        $messages = Message::where('recipient_id', auth()->user()->id)->whereIn('id', $request->recipients_id);
+        
+        $messages = auth()->user()->recipient()->whereIn('id', $request->recipients_id);
 
         switch($request->submit_button) {
 
@@ -41,6 +41,11 @@ class MessageController extends Controller
 
             case 'unread':
                 $messages->update(['read' => 0]);
+                break;
+
+            case 'remove':
+                $messages->delete();
+                break;
 
         }
 

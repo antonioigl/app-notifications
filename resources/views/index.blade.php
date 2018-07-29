@@ -13,12 +13,16 @@
                 <div class="card">
                     <div class="card-header">Notificaciones</div>
                     <div class="card-body">
-                        <form action="{{route('messages.update')}}" method="POST">
+                        <form action="{{route('messages.update')}}" method="POST" id="recipient-form">
                             {!! method_field('PUT') !!}
                             {!! csrf_field() !!}
 
-                            <button class="btn btn-default" name="submit_button" value="unread" title="Marcar como no leído"><i class="fa fa-envelope"></i></button>
-                            <button class="btn btn-default" name="submit_button" value="read" title="Marcar como leído"><i class="fa fa-envelope-open"></i></button>
+                            <button type="submit" class="btn btn-default" name="submit_button" value="unread" title="Marcar como no leído"><i class="fa fa-envelope"></i></button>
+                            <button type="submit" class="btn btn-default" name="submit_button" value="read" title="Marcar como leído"><i class="fa fa-envelope-open"></i></button>
+                            <button type="button" class="btn btn-danger" title="Eliminar" data-toggle="modal" data-target="#recipient-delete-modal"><i class="fa fa-trash-o"></i></button>
+                            {{--@include('modal')--}}
+                            @include('modal')
+
                             <p><strong>No leídos: {{auth()->user()->recipient()->where('read', 0)->count()}}</strong></p>
 
                             <table id="recipient-table" class="display" style="width:100%">
@@ -64,6 +68,9 @@
 
     $(document).ready(function (){
         var table = $('#recipient-table').DataTable({
+            'language': {
+                'url': '//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json'
+            },
             'columnDefs': [{
                 'targets': 0,
                 'searchable': false,
@@ -96,6 +103,23 @@
         });
 
     });
+
+    // $('.form-delete').on('click', function(e){
+    //     e.preventDefault();
+    //     var $form=$(this);
+    //     $('#confirm').modal({ backdrop: 'static', keyboard: false })
+    //         .on('click', '#delete-btn', function(){
+    //             $form.submit();
+    //         });
+    // });
+
+    // $('#recipient-delete').on('click', function(e){
+    //     e.preventDefault();
+    //     var $form = $('#recipient-form');
+    //     $('#confirm-recipient-delete').on('click', function(){
+    //             $form.submit();
+    //         });
+    // });
 
 </script>
 
