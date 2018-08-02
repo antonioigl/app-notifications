@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Message;
+use App\Http\Requests\MessageCreateRequest;
 
 class MessageController extends Controller
 {
@@ -12,7 +13,7 @@ class MessageController extends Controller
         return view('index');
     }
 
-    public function store(Request $request)
+    public function store(MessageCreateRequest $request)
     {
         Message::create([
             'sender_id' => auth()->id(),
