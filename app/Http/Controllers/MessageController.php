@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Message;
 use App\Http\Requests\MessageCreateRequest;
+use App\Http\Requests\MessageEditRequest;
 
 class MessageController extends Controller
 {
@@ -25,13 +26,9 @@ class MessageController extends Controller
 
     }
 
-    public function update(Request $request)
+    public function update(MessageEditRequest $request)
     {
-        if(is_null($request->recipients_id)){
-            return back()->with('flash', 'No has seleccionado ningún mensaje');
-        }
-        //else
-        
+
         $messages = auth()->user()->recipient()->whereIn('id', $request->recipients_id);
 
         switch($request->submit_button) {
