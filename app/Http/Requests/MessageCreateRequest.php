@@ -24,7 +24,8 @@ class MessageCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'recipient_id' => 'required',
+            'recipient_id' => 'required|exists:users,id|different:' . auth()->id(),
+            'exists:staff,account_id,1',
             'body' => 'required|max:400',
         ];
     }
@@ -33,8 +34,9 @@ class MessageCreateRequest extends FormRequest
     {
         return [
             'recipient_id.required' => 'El :attribute es obligatorio.',
+            'recipient_id.different' => 'El :attribute introducido no es válido.',
             'body.required' => 'El :attribute es obligatorio',
-            '.max' => 'El :attribute debe ser menor a 400 carácteres'
+            'body.max' => 'El :attribute debe ser menor a 400 carácteres'
         ];
     }
 
