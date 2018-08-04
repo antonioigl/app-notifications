@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', "Notificaciones recibidas")
 
 @section('content')
 
@@ -7,7 +8,7 @@
             <div class="col-md-12">
                 @if(session()->has('flash'))
                     <div class="container">
-                        <div class="alert alert-danger">{{session('flash')}}</div>
+                        <div class="alert alert-success">{{session('flash')}}</div>
                     </div>
                 @endif
                 <div class="card">
@@ -20,6 +21,13 @@
                             <button type="submit" class="btn btn-default" name="submit_button" value="unread" title="Marcar como no leído"><i class="fa fa-envelope"></i></button>
                             <button type="submit" class="btn btn-default" name="submit_button" value="read" title="Marcar como leído"><i class="fa fa-envelope-open"></i></button>
                             <button type="button" class="btn btn-danger" title="Eliminar" data-toggle="modal" data-target="#recipient-delete-modal"><i class="fa fa-trash-o"></i></button>
+
+                            @if ($errors->has('recipients_id'))
+                                <p class="text-danger">
+                                    <strong>{{ $errors->first('recipients_id') }}</strong>
+                                </p>
+                            @endif
+
                             {{--@include('modal')--}}
                             @include('modal')
 
@@ -41,18 +49,23 @@
                                             <td>
                                                 <input type="checkbox" name="recipients_id[]" value="{{$recipient->id}}">
                                             </td>
-                                            <td {!! !$recipient->read ? 'class="font-weight-bold"' : ''!!}>
-                                                {{$recipient->sender->email}} ({{$recipient->sender->name}})
+                                            <td>
+                                                <a href="{{route('messages.show', $recipient->id)}}" title="Leer más" class="btn btn-link text-dark {!! !$recipient->read ? 'font-weight-bold' : ''!!}">
+                                                    {{$recipient->sender->email}} ({{$recipient->sender->name}})
+                                                </a>
                                             </td>
-                                            <td {!! !$recipient->read ? 'class="font-weight-bold"' : ''!!}>
-                                                {{strlen($recipient->body) <= 20 ? $recipient->body : substr($recipient->body, 0, 20) . '...'}}
+                                            <td>
+                                                <a href="{{route('messages.show', $recipient->id)}}" title="Leer más" class="btn btn-link text-dark {!! !$recipient->read ? 'font-weight-bold' : ''!!}">
+                                                    {{strlen($recipient->body) <= 20 ? $recipient->body : substr($recipient->body, 0, 20) . '...'}}
+                                                </a>
                                             </td>
-                                            <td {!! !$recipient->read ? 'class="font-weight-bold"' : ''!!}>
-                                                {{$recipient->created_at}}
+                                            <td>
+                                                <a href="{{route('messages.show', $recipient->id)}}" title="Leer más" class="btn btn-link text-dark {!! !$recipient->read ? 'font-weight-bold' : ''!!}">
+                                                    {{$recipient->created_at}}
+                                                </a>
                                             </td>
                                         </tr>
                                     @endforeach
-
                                 </tbody>
                             </table>
                         </form>
@@ -103,23 +116,6 @@
         });
 
     });
-
-    // $('.form-delete').on('click', function(e){
-    //     e.preventDefault();
-    //     var $form=$(this);
-    //     $('#confirm').modal({ backdrop: 'static', keyboard: false })
-    //         .on('click', '#delete-btn', function(){
-    //             $form.submit();
-    //         });
-    // });
-
-    // $('#recipient-delete').on('click', function(e){
-    //     e.preventDefault();
-    //     var $form = $('#recipient-form');
-    //     $('#confirm-recipient-delete').on('click', function(){
-    //             $form.submit();
-    //         });
-    // });
 
 </script>
 

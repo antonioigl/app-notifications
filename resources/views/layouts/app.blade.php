@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>@yield('title') - {{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
     {{--<script src="{{ asset('js/app.js') }}" defer></script>--}}
@@ -56,7 +56,10 @@
                                 <a href="/home" class="nav-link {{ Route::current()->getName() == 'home' ? 'active' : ''}}">Enviar mensaje</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{route('messages.index')}}" class="nav-link {{ Route::current()->getName() == 'messages.index' ? 'active' : ''}}">Notificaciones {!!auth()->user()->recipient()->where('read',0)->count() ? '<span class="badge badge-secondary">' . auth()->user()->recipient()->where('read',0)->count() . '</span>': ''!!} </a>
+                                <a href="{{route('messages.index')}}" class="nav-link {{ Route::current()->getName() == 'messages.index' || 'messages.show'? 'active' : ''}}">Recibidos {!!auth()->user()->recipient()->where('read',0)->count() ? '<span class="badge badge-secondary">' . auth()->user()->recipient()->where('read',0)->count() . '</span>': ''!!} </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{route('messages.index')}}" class="nav-link {{ Route::current()->getName() == 'messages.index' || 'messages.show'? 'active' : ''}}">Enviados </a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
