@@ -24,21 +24,22 @@ class MessageEditRequest extends FormRequest
     public function rules()
     {
         return [
-            'recipient_id' => 'required',
+            'recipients_id' => 'required|array',
+            'recipients_id.*' => 'exists:messages,id',
         ];
     }
 
     public function messages()
     {
         return [
-            'recipient_id.required' => 'No has seleccionado ninguna :attribute.',
+            'recipients_id.required' => 'No has seleccionado ninguna :attribute.',
         ];
     }
 
     public function attributes()
     {
         return [
-            'recipient_id' => 'notificación',
+            'recipients_id' => 'notificación',
         ];
     }
 }
