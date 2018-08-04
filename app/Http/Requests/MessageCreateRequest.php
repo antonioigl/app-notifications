@@ -24,7 +24,7 @@ class MessageCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'recipient_id' => 'required|exists:users,id|different:' . auth()->id(),
+            'recipient_id' => 'required|exists:users,id|not_in:' . auth()->id(),
             'exists:staff,account_id,1',
             'body' => 'required|max:400',
         ];
