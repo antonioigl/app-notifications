@@ -9,9 +9,14 @@ use App\Http\Requests\MessageEditRequest;
 
 class MessageController extends Controller
 {
-    public function index()
+    public function recipientIndex()
     {
-        return view('index');
+        return view('recipient.index');
+    }
+
+    public function senderIndex()
+    {
+        return view('sender.index');
     }
 
     public function store(MessageCreateRequest $request)
@@ -26,7 +31,7 @@ class MessageController extends Controller
 
     }
 
-    public function update(MessageEditRequest $request)
+    public function recipientUpdate(MessageEditRequest $request)
     {
 
         switch($request->submit_button) {
@@ -47,11 +52,11 @@ class MessageController extends Controller
         return redirect()->route('recipient.index');
     }
 
-    public function show(Message $message)
+    public function recipientShow(Message $message)
     {
         $message = auth()->user()->recipient()->findOrFail($message->id);
         $message->update(['read' => 1]);
 
-        return view('show', compact('message'));
+        return view('recipient.show', compact('message'));
     }
 }
