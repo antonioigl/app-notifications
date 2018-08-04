@@ -21,10 +21,10 @@
                                 <p><strong>Recibido el día: </strong>{{$message->created_at}}</p>
                             </div>
                             <div class="offset-md-4">
-                                <form action="{{route('messages.update')}}" method="POST" id="recipient-form">
+                                <form action="{{route('recipient.update')}}" method="POST" id="recipient-form">
                                     {!! method_field('PUT') !!}
                                     {!! csrf_field() !!}
-                                    <a href="{{route('messages.index')}}" class="btn btn-link" title="Atrás"><i class="fa fa-reply"></i> Atrás</a>
+                                    <a href="{{route('recipient.index')}}" class="btn btn-link" title="Atrás"><i class="fa fa-reply"></i> Atrás</a>
                                     <input type="hidden" name="recipients_id[]" value="{{$message->id}}">
                                     <button type="submit" class="btn btn-default" name="submit_button" value="unread" title="Marcar como no leído"><i class="fa fa-envelope"></i></button>
                                     <button type="button" class="btn btn-danger" title="Eliminar" data-toggle="modal" data-target="#recipient-delete-modal"><i class="fa fa-trash-o"></i></button>

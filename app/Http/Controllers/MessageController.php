@@ -41,10 +41,10 @@ class MessageController extends Controller
 
             case 'remove':
                 Message::remove($request->recipients_id);
-                return redirect()->route('messages.index')->with('flash', 'Se ha eliminado satisfactoriamente');
+                return redirect()->route('recipient.index')->with('flash', 'Se ha eliminado satisfactoriamente');
         }
 
-        return redirect()->route('messages.index');
+        return redirect()->route('recipient.index');
     }
 
     public function show(Message $message)

@@ -20,11 +20,14 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::middleware(['auth'])->group(function () {
-
     Route::get('/home', 'HomeController@index')->name('home');
-    Route::get('/messages', 'MessageController@index')->name('messages.index');
     Route::post('/messages', 'MessageController@store')->name('messages.store');
-    Route::put('/messages', 'MessageController@update')->name('messages.update');
-    Route::get('/messages/{message}/show', 'MessageController@show')->name('messages.show');
+
+    Route::group(['prefix' => 'recipient'], function() {
+        Route::get('/messages', 'MessageController@index')->name('recipient.index');
+        Route::put('/messages', 'MessageController@update')->name('recipient.update');
+        Route::get('/messages/{message}/show', 'MessageController@show')->name('recipient.show');
+    });
+
 
 });

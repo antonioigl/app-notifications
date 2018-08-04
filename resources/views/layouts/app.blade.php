@@ -56,11 +56,11 @@
                                 <a href="/home" class="nav-link {{ Route::current()->getName() == 'home' ? 'active' : ''}}">Enviar mensaje</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{route('messages.index')}}" class="nav-link {{ Route::current()->getName() == 'messages.index' || 'messages.show'? 'active' : ''}}">Recibidos {!!auth()->user()->recipient()->where('read',0)->count() ? '<span class="badge badge-secondary">' . auth()->user()->recipient()->where('read',0)->count() . '</span>': ''!!} </a>
+                                <a href="{{route('recipient.index')}}" class="nav-link {{ (Route::current()->getName() == 'recipient.index' || Route::current()->getName() == 'recipient.show') ? 'active' : ''}}">Recibidos {!!auth()->user()->recipient()->where('read',0)->count() ? '<span class="badge badge-secondary">' . auth()->user()->recipient()->where('read',0)->count() . '</span>': ''!!} </a>
                             </li>
-                            <li class="nav-item">
-                                <a href="{{route('messages.index')}}" class="nav-link {{ Route::current()->getName() == 'messages.index' || 'messages.show'? 'active' : ''}}">Enviados </a>
-                            </li>
+                            {{--<li class="nav-item">--}}
+                                {{--<a href="{{route('sender.index')}}" class="nav-link {{ Route::current()->getName() == 'sender.index' || 'sender.show'? 'active' : ''}}">Enviados </a>--}}
+                            {{--</li>--}}
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
