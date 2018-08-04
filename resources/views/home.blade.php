@@ -15,15 +15,25 @@
                         {{csrf_field()}}
                         <div class="card-body">
                             <div class="form-group">
-                                <select name="recipient_id" class="form-control">
+                                <select name="recipient_id" class="form-control" required>
                                     <option value="">Selecciona el usuario</option>
                                     @foreach($users as $user)
-                                        <option value="{{$user->id}}">{{$user->name}}</option>
+                                        <option value="{{$user->id}}" {{$user->id == old('recipient_id') ? 'selected' : ''}}>{{$user->email}} ({{$user->name}})</option>
                                     @endforeach
                                 </select>
+                                @if ($errors->has('recipient_id'))
+                                    <p class="text-danger">
+                                     <strong>{{ $errors->first('recipient_id') }}</strong>
+                                   </p>
+                                @endif
                             </div>
                             <div class="form-group">
-                                <textarea name="body" class="form-control" placeholder="Escribe aquí tu mensaje">{{old('body')}}</textarea>
+                                <textarea name="body" class="form-control" required maxlength="400" placeholder="Escribe aquí tu mensaje">{{old('body')}}</textarea>
+                                @if ($errors->has('body'))
+                                    <span class="text-danger">
+                                        <strong>{{ $errors->first('body') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                             <div class="form-group">
                                 <button class="btn btn-primary btn-block">Enviar</button>
