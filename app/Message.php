@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Message extends Model
 {
-    protected $fillable = ['sender_id', 'recipient_id', 'body'];
+    protected $fillable = ['sender_id', 'recipient_id', 'body', 'read'];
 
     protected $casts = [
         'read' => 'boolean'
@@ -22,5 +22,22 @@ class Message extends Model
     public function recipient()
     {
         return $this->belongsTo(User::class, 'recipient_id');
+    }
+
+    public static function setRead($messagesId)
+    {
+        return auth()->user()->recipient()->whereIn('id',$messagesId)->update(['read' => 1]);
+    }
+
+    public static function setUnread($messagesId)
+    {
+        return auth()->user()->recipient()->whereIn('id', $messagesId)->update(['read' => 0]);
+
+    }
+
+    public static function remove($messagesId)
+    {
+        return auth()->user()->recipient()->whereIn('id', $messagesId)->delete();
+
     }
 }
