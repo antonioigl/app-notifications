@@ -25,5 +25,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/messages', 'MessageController@index')->name('messages.index');
     Route::post('/messages', 'MessageController@store')->name('messages.store');
     Route::put('/messages', 'MessageController@update')->name('messages.update');
+    Route::get('/messages/{message}/show', 'MessageController@show')->name('messages.show');
 
 });

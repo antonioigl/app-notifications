@@ -29,24 +29,29 @@ class MessageController extends Controller
     public function update(MessageEditRequest $request)
     {
 
-        $messages = auth()->user()->recipient()->whereIn('id', $request->recipients_id);
-
         switch($request->submit_button) {
 
             case 'read':
-                $messages->update(['read' => 1]);
+                Message::setRead($request->recipients_id);
                 break;
 
             case 'unread':
-                $messages->update(['read' => 0]);
+                Message::setUnread($request->recipients_id);
                 break;
 
             case 'remove':
-                $messages->delete();
-                break;
-
+                Message::remove($request->recipients_id);
+                return redirect()->route('messages.index')->with('flash', 'Se ha eliminado satisfactoriamente');
         }
 
-        return back();
+        return redirect()->route('messages.index');
+    }
+
+    public function show(Message $message)
+    {
+        $message = auth()->user()->recipient()->findOrFail($message->id);
+        $message->update(['read' => 1]);
+
+        return view('show', compact('message'));
     }
 }
