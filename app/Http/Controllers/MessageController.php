@@ -22,7 +22,7 @@ class MessageController extends Controller
             'body' => $request->body,
         ]);
 
-        return back()->with('flash', 'Tu mensaje fue enviado');
+        return back()->with('success', 'Tu mensaje fue enviado');
 
     }
 
@@ -41,7 +41,7 @@ class MessageController extends Controller
 
             case 'remove':
                 Message::remove($request->recipients_id);
-                return redirect()->route('messages.index')->with('flash', 'Se ha eliminado satisfactoriamente');
+                return redirect()->route('messages.index')->with('success', 'Se ha eliminado satisfactoriamente');
         }
 
         return redirect()->route('messages.index');
