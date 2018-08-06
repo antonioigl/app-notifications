@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use Mail;
+use App\Mail\EmailConfirmation;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -63,10 +66,44 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'confirmation_code' => str_random(25),
         ]);
+
+        Mail::to($user)->send(new EmailConfirmation($user));
+
+//        return redirect()->back();
+        return $user;
+    }
+
+    public function verify($code)
+    {
+        $user = User::where('confirmation_code', $code)->first();
+
+        if (! $user){
+            return redirect()->route('login')->with('warning', 'Lo sentimos, su correo electrónico no puede ser identificado');
+        }
+        //else
+        if(!$user->confirmed) {
+            $user->confirmed = 1;
+//            $user->confirmation_code = null;
+            $user->save();
+            $status = 'Tu correo electrónico ha sido verificado. Ahora puedes iniciar sesión';
+        }
+        else{
+            $status = 'Tu correo electrónico ya está verificado. Ahora puedes iniciar sesión';
+        }
+
+        return redirect()->route('login')->with('success', $status);
+
+    }
+
+    protected function registered(Request $request, $user)
+    {
+        $this->guard()->logout();
+        return redirect('/login')->with('success', 'Te hemos enviado un código de activación. Revise su correo electrónico y haz clic en el enlace para verificar');
     }
 }

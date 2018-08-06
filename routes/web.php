@@ -11,6 +11,7 @@
 |
 */
 
+use function foo\func;
 use Yajra\DataTables\DataTables;
 
 Route::get('/', function () {
@@ -18,6 +19,8 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+
+Route::get('/register/verify/{code}', 'Auth\RegisterController@verify')->name('register.verify');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', 'HomeController@index')->name('home');
