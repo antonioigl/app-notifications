@@ -11,7 +11,6 @@
 |
 */
 
-use function foo\func;
 use Yajra\DataTables\DataTables;
 
 Route::get('/', function () {
