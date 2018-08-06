@@ -10,16 +10,16 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            @if(session()->has('flash'))
-                <div class="container">
-                    <div class="alert alert-success">{{session('flash')}}</div>
-                </div>
-            @endif
             <div class="card">
                 <div class="card-header">Enviar mensaje</div>
                     <form action="{{route('messages.store')}}" method="POST">
                         {{csrf_field()}}
                         <div class="card-body">
+                            @if(session()->has('success'))
+                                <div class="container">
+                                    <div class="alert alert-success">{{session('success')}}</div>
+                                </div>
+                            @endif
                             <div class="form-group">
                                 <select name="recipient_id" class="form-control" required>
                                     <option value="">Selecciona el usuario</option>

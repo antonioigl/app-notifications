@@ -10,14 +10,14 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
-                @if(session()->has('flash'))
-                    <div class="container">
-                        <div class="alert alert-success">{{session('flash')}}</div>
-                    </div>
-                @endif
                 <div class="card">
                     <div class="card-header">Notificaciones</div>
                     <div class="card-body">
+                        @if(session()->has('success'))
+                            <div class="container">
+                                <div class="alert alert-success">{{session('success')}}</div>
+                            </div>
+                        @endif
                         <form action="{{route('messages.update')}}" method="POST" id="recipient-form">
                             {!! method_field('PUT') !!}
                             {!! csrf_field() !!}
