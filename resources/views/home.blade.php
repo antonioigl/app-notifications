@@ -1,6 +1,10 @@
 @extends('layouts.app')
 @section('title', "Home")
 
+@section('breadcrumbs')
+    {{ Breadcrumbs::render('home') }}
+@endsection
+
 
 @section('content')
 <div class="container">

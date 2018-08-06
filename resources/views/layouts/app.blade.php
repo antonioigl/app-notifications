@@ -82,6 +82,17 @@
         </nav>
 
         <main class="py-4">
+
+
+
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-12">
+                        @yield('breadcrumbs')
+                    </div>
+                </div>
+            </div>
+
             @yield('content')
         </main>
         {{--<script src="{{ asset('js/app.js') }}" defer></script>--}}

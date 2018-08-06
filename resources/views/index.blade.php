@@ -1,6 +1,10 @@
 @extends('layouts.app')
 @section('title', "Notificaciones recibidas")
 
+@section('breadcrumbs')
+    {{ Breadcrumbs::render('messages') }}
+@endsection
+
 @section('content')
 
     <div class="container">

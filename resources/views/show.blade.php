@@ -2,6 +2,11 @@
 
 @section('title', 'Ver notificación')
 
+
+@section('breadcrumbs')
+    {{ Breadcrumbs::render('message', $message) }}
+@endsection
+
 @section('content')
 
     <div class="container">
