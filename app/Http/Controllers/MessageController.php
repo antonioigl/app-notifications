@@ -9,14 +9,9 @@ use App\Http\Requests\MessageEditRequest;
 
 class MessageController extends Controller
 {
-    public function recipientIndex()
+    public function index()
     {
-        return view('recipient.index');
-    }
-
-    public function senderIndex()
-    {
-        return view('sender.index');
+        return view('index');
     }
 
     public function store(MessageCreateRequest $request)
@@ -31,7 +26,7 @@ class MessageController extends Controller
 
     }
 
-    public function recipientUpdate(MessageEditRequest $request)
+    public function update(MessageEditRequest $request)
     {
 
         switch($request->submit_button) {
@@ -46,17 +41,17 @@ class MessageController extends Controller
 
             case 'remove':
                 Message::remove($request->recipients_id);
-                return redirect()->route('recipient.index')->with('flash', 'Se ha eliminado satisfactoriamente');
+                return redirect()->route('messages.index')->with('flash', 'Se ha eliminado satisfactoriamente');
         }
 
-        return redirect()->route('recipient.index');
+        return redirect()->route('messages.index');
     }
 
-    public function recipientShow(Message $message)
+    public function show(Message $message)
     {
         $message = auth()->user()->recipient()->findOrFail($message->id);
         $message->update(['read' => 1]);
 
-        return view('recipient.show', compact('message'));
+        return view('show', compact('message'));
     }
 }

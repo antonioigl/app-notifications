@@ -22,18 +22,7 @@ Auth::routes();
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', 'HomeController@index')->name('home');
     Route::post('/messages', 'MessageController@store')->name('messages.store');
-
-    Route::group(['prefix' => 'recipient'], function() {
-        Route::get('/messages', 'MessageController@recipientIndex')->name('recipient.index');
-        Route::put('/messages', 'MessageController@recipientUpdate')->name('recipient.update');
-        Route::get('/messages/{message}/show', 'MessageController@recipientShow')->name('recipient.show');
-    });
-
-    Route::group(['prefix' => 'sender'], function() {
-        Route::get('/messages', 'MessageController@senderIndex')->name('sender.index');
-        Route::put('/messages', 'MessageController@update')->name('sender.update');
-        Route::get('/messages/{message}/show', 'MessageController@show')->name('sender.show');
-    });
-
-
+    Route::get('/messages', 'MessageController@index')->name('messages.index');
+    Route::put('/messages', 'MessageController@update')->name('messages.update');
+    Route::get('/messages/{message}/show', 'MessageController@show')->name('messages.show');
 });

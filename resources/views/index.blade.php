@@ -14,7 +14,7 @@
                 <div class="card">
                     <div class="card-header">Notificaciones</div>
                     <div class="card-body">
-                        <form action="{{route('recipient.update')}}" method="POST" id="recipient-form">
+                        <form action="{{route('messages.update')}}" method="POST" id="recipient-form">
                             {!! method_field('PUT') !!}
                             {!! csrf_field() !!}
 
@@ -50,17 +50,17 @@
                                                 <input type="checkbox" name="recipients_id[]" value="{{$recipient->id}}">
                                             </td>
                                             <td>
-                                                <a href="{{route('recipient.show', $recipient->id)}}" title="Leer más" class="btn btn-link text-dark {!! !$recipient->read ? 'font-weight-bold' : ''!!}">
+                                                <a href="{{route('messages.show', $recipient->id)}}" title="Leer más" class="btn btn-link text-dark {!! !$recipient->read ? 'font-weight-bold' : ''!!}">
                                                     {{$recipient->sender->email}} ({{$recipient->sender->name}})
                                                 </a>
                                             </td>
                                             <td>
-                                                <a href="{{route('recipient.show', $recipient->id)}}" title="Leer más" class="btn btn-link text-dark {!! !$recipient->read ? 'font-weight-bold' : ''!!}">
+                                                <a href="{{route('messages.show', $recipient->id)}}" title="Leer más" class="btn btn-link text-dark {!! !$recipient->read ? 'font-weight-bold' : ''!!}">
                                                     {{strlen($recipient->body) <= 20 ? $recipient->body : substr($recipient->body, 0, 20) . '...'}}
                                                 </a>
                                             </td>
                                             <td>
-                                                <a href="{{route('recipient.show', $recipient->id)}}" title="Leer más" class="btn btn-link text-dark {!! !$recipient->read ? 'font-weight-bold' : ''!!}">
+                                                <a href="{{route('messages.show', $recipient->id)}}" title="Leer más" class="btn btn-link text-dark {!! !$recipient->read ? 'font-weight-bold' : ''!!}">
                                                     {{$recipient->created_at}}
                                                 </a>
                                             </td>
