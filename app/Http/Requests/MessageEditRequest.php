@@ -25,7 +25,7 @@ class MessageEditRequest extends FormRequest
     {
         return [
             'recipients_id' => 'required|array',
-            'recipients_id.*' => 'exists:messages,id',
+            'recipients_id.*' => 'required|numeric|exists:messages,id|in:' . auth()->user()->recipient->implode('id', ', '),
         ];
     }
 
@@ -33,6 +33,9 @@ class MessageEditRequest extends FormRequest
     {
         return [
             'recipients_id.required' => 'No has seleccionado ninguna :attribute.',
+            'recipients_id.*.numeric' => 'La :attribute seleccianada no es válida',
+            'recipients_id.*.exists' => 'La :attribute seleccianada no es válida',
+            'recipients_id.*.in' => 'La :attribute seleccianada no es válida',
         ];
     }
 
@@ -40,6 +43,7 @@ class MessageEditRequest extends FormRequest
     {
         return [
             'recipients_id' => 'notificación',
+            'recipients_id.*' => 'notificación',
         ];
     }
 }
