@@ -75,7 +75,6 @@ class RegisterController extends Controller
 
         Mail::to($user)->send(new EmailConfirmation($user));
 
-//        return redirect()->back();
         return $user;
     }
 
