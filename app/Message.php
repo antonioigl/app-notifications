@@ -26,18 +26,18 @@ class Message extends Model
 
     public static function setRead($messagesId)
     {
-        return auth()->user()->recipient()->whereIn('id',$messagesId)->update(['read' => 1]);
+        return static::whereIn('id',$messagesId)->update(['read' => 1]);
     }
 
     public static function setUnread($messagesId)
     {
-        return auth()->user()->recipient()->whereIn('id', $messagesId)->update(['read' => 0]);
+        return static::whereIn('id', $messagesId)->update(['read' => 0]);
 
     }
 
     public static function remove($messagesId)
     {
-        return auth()->user()->recipient()->whereIn('id', $messagesId)->delete();
+        return static::whereIn('id', $messagesId)->delete();
 
     }
 }
