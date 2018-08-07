@@ -31,6 +31,11 @@
                                     <strong>{{ $errors->first('recipients_id') }}</strong>
                                 </p>
                             @endif
+                            @if ($errors->has('recipients_id.*'))
+                                <p class="text-danger">
+                                    <strong>{{ $errors->first('recipients_id.*') }}</strong>
+                                </p>
+                            @endif
 
                             {{--@include('modal')--}}
                             @include('modal')
