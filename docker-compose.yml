@@ -1,0 +1,47 @@
+version: '2'
+
+services:
+    appnotifications:
+        build:
+            dockerfile: Dockerfile
+            context: .
+        working_dir: /var/www
+        hostname: local
+        ports:
+        - 8081:80
+        volumes:
+        - .:/var/www
+        - ./000-default.conf:/etc/apache2/sites-enabled/000-default.conf:ro
+        - ./logs:/var/www/logs
+        - ~/.ssh:/root/.ssh
+        environment:
+        - "DB_PORT=3306"
+        - "DB_HOST=database"
+
+    # The Database
+    database:
+        image: mysql:5.7
+        volumes:
+        - dbdata:/var/lib/mysql
+        environment:
+        - "MYSQL_DATABASE=homestead"
+        - "MYSQL_USER=homestead"
+        - "MYSQL_PASSWORD=secret"
+        - "MYSQL_ROOT_PASSWORD=secret"
+        ports:
+        - 33061:3306
+
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        container_name: phpmyadmin
+        environment:
+        - PMA_ARBITRARY=1
+        restart: always
+        ports:
+        - 8080:80
+        volumes:
+        - /sessions
+
+volumes:
+    dbdata:
+
