@@ -46,17 +46,17 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link {{ Route::current()->getName() == 'login' ? 'active' : ''}}" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link {{ Route::current() ? (Route::current()->getName() == 'login' ? 'active' : '') : ''}}" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link {{ Route::current()->getName() == 'register' ? 'active' : ''}}" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                <a class="nav-link {{ Route::current() ? (Route::current()->getName() == 'register' ? 'active' : '') : ''}}" href="{{ route('register') }}">{{ __('Register') }}</a>
                             </li>
                         @else
                             <li class="nav-item">
-                                <a href="/home" class="nav-link {{ Route::current()->getName() == 'home' ? 'active' : ''}}">Enviar mensaje</a>
+                                <a href="/home" class="nav-link {{  Route::current() ? (Route::current()->getName() == 'home' ? 'active' : '') : ''}}">Enviar mensaje</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{route('messages.index')}}" class="nav-link {{ (Route::current()->getName() == 'messages.index' || Route::current()->getName() == 'messages.show') ? 'active' : ''}}">Recibidos {!!auth()->user()->recipient()->where('read',0)->count() ? '<span class="badge badge-secondary">' . auth()->user()->recipient()->where('read',0)->count() . '</span>': ''!!} </a>
+                                <a href="{{route('messages.index')}}" class="nav-link {{ Route::current() ? ((Route::current()->getName() == 'messages.index' || Route::current()->getName() == 'messages.show') ? 'active' : '') : ''}}">Recibidos {!!auth()->user()->recipient()->where('read',0)->count() ? '<span class="badge badge-secondary">' . auth()->user()->recipient()->where('read',0)->count() . '</span>': ''!!} </a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
