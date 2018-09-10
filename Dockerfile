@@ -1,7 +1,7 @@
 #-----------------------------------------------------------------------
 # To create the docker image :
 # cd <this file directory>
-# docker build -t apache-php-dev .
+# docker build -t appnotifications .
 #
 # Start image :
 #docker-compose up
@@ -17,6 +17,8 @@
 #
 # Open browser :
 # http://localhost:8081
+# or
+# http://app-notifications.local:8081
 #-----------------------------------------------------------------------
 
 FROM php:7.2-apache
