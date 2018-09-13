@@ -37,7 +37,6 @@
                                 </p>
                             @endif
 
-                            {{--@include('modal')--}}
                             @include('modal')
 
                             <p><strong>No leídos: {{auth()->user()->recipient()->where('read', 0)->count()}}</strong></p>

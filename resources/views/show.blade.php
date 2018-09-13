@@ -33,7 +33,6 @@
                                     <input type="hidden" name="recipients_id[]" value="{{$message->id}}">
                                     <button type="submit" class="btn btn-default" name="submit_button" value="unread" title="Marcar como no leído"><i class="fa fa-envelope"></i></button>
                                     <button type="button" class="btn btn-danger" title="Eliminar" data-toggle="modal" data-target="#recipient-delete-modal"><i class="fa fa-trash-o"></i></button>
-                                    {{--@include('modal')--}}
                                     @include('modal')
                                 </form>
                             </div>
