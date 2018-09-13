@@ -53,21 +53,21 @@
                             </li>
                         @else
                             <li class="nav-item">
-                                <a href="/home" class="nav-link {{  Route::current() ? (Route::current()->getName() == 'home' ? 'active' : '') : ''}}">Enviar mensaje</a>
+                                <a href="/home" class="nav-link {{  Route::current() ? (Route::current()->getName() == 'home' ? 'active' : '') : ''}}"><i class="fa fa-paper-plane" aria-hidden="true"></i> Enviar mensaje</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{route('messages.index')}}" class="nav-link {{ Route::current() ? ((Route::current()->getName() == 'messages.index' || Route::current()->getName() == 'messages.show') ? 'active' : '') : ''}}">Recibidos {!!auth()->user()->recipient()->where('read',0)->count() ? '<span class="badge badge-secondary">' . auth()->user()->recipient()->where('read',0)->count() . '</span>': ''!!} </a>
+                                <a href="{{route('messages.index')}}" class="nav-link {{ Route::current() ? ((Route::current()->getName() == 'messages.index' || Route::current()->getName() == 'messages.show') ? 'active' : '') : ''}}"><i class="fa fa-inbox" aria-hidden="true"></i> Recibidos {!!auth()->user()->recipient()->where('read',0)->count() ? '<span class="badge badge-secondary">' . auth()->user()->recipient()->where('read',0)->count() . '</span>': ''!!} </a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                    <i class="fa fa-user" aria-hidden="true"></i> {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        <i class="fa fa-sign-out" aria-hidden="true"></i> {{ __('Logout') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

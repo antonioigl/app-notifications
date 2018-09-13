@@ -42,7 +42,7 @@
                                 @endif
                             </div>
                             <div class="form-group">
-                                <button class="btn btn-primary btn-block">Enviar</button>
+                                <button class="btn btn-primary btn-block"><i class="fa fa-paper-plane" aria-hidden="true"></i> Enviar</button>
                             </div>
                         </div>
                     </form>
