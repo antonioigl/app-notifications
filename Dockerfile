@@ -10,6 +10,7 @@
 #docker-compose exec php appnotifications ./init.bash
 
 #or execute
+#docker-compose exec appnotifications composer install
 #docker-compose exec appnotifications php artisan key:generate
 #docker-compose exec appnotifications php artisan migrate:fresh --seed
 #chmod -R 775 storage
