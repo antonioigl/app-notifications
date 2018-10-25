@@ -1,5 +1,9 @@
 version: '2'
 
+volumes:
+  dbdata:
+    driver: local
+
 services:
     appnotifications:
         build:
@@ -14,32 +18,30 @@ services:
         - ./000-default.conf:/etc/apache2/sites-enabled/000-default.conf:ro
         - ./logs:/var/www/logs
         - ~/.ssh:/root/.ssh
-        environment:
-        - "DB_PORT=3306"
-        - "DB_HOST=database"
+        links:
+        - database
 
-    # The Database
+    # database
     database:
         image: mysql:5.7
-        volumes:
-        - dbdata:/var/lib/mysql
+        ports:
+        - 33061:3306
         environment:
         - "MYSQL_DATABASE=notifications"
         - "MYSQL_ROOT_PASSWORD=secret"
-        ports:
-        - 33061:3306
+        volumes:
+        - dbdata:/var/lib/mysql
 
     phpmyadmin:
         image: phpmyadmin/phpmyadmin
-        container_name: phpmyadmin
         environment:
-        - PMA_ARBITRARY=1
-        restart: always
+        - "MYSQL_USERNAME=root"
+        - "MYSQL_ROOT_PASSWORD=secret"
+        - "PMA_HOST=database"
+        links:
+        - database
         ports:
         - 8080:80
-        volumes:
-        - /sessions
+        restart: always
 
-volumes:
-    dbdata:
 
