@@ -7,7 +7,7 @@
 #docker-compose up
 
 #after
-#docker-compose exec php ./init.bash
+#docker-compose exec php appnotifications ./init.bash
 
 #or execute
 #docker-compose exec appnotifications php artisan key:generate
