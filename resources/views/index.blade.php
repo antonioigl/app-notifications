@@ -52,7 +52,7 @@
                                 </thead>
                                 <tbody>
 
-                                    @foreach(auth()->user()->recipient as $recipient)
+                                    @foreach(auth()->user()->recipient()->orderBy('created_at', 'desc')->get() as $recipient)
                                         <tr>
                                             <td>
                                                 <input type="checkbox" name="recipients_id[]" value="{{$recipient->id}}">
