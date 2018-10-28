@@ -46,8 +46,8 @@
                                 <tr>
                                     <th class="text-center"><input type="checkbox" name="select_all" value="1" id="recipient-table-select-all"></th>
                                     <th>Remitente</th>
-                                    <th>Texto</th>
-                                    <th>Fecha</th>
+                                    <th class="hidden-xs">Texto</th>
+                                    <th class="hidden-xs">Fecha</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -59,15 +59,16 @@
                                             </td>
                                             <td>
                                                 <a href="{{route('messages.show', $recipient->id)}}" title="Leer más" class="btn btn-link text-dark {!! !$recipient->read ? 'font-weight-bold' : ''!!}">
-                                                    {{$recipient->sender->email}} ({{$recipient->sender->name}})
+                                                    <span class="hidden-xs">{{$recipient->sender->email}}  ({{$recipient->sender->name}})</span>
+                                                    <span class="visible-xs">{{$recipient->sender->email}} <br>({{$recipient->sender->name}})</span>
                                                 </a>
                                             </td>
-                                            <td>
+                                            <td class="hidden-xs">
                                                 <a href="{{route('messages.show', $recipient->id)}}" title="Leer más" class="btn btn-link text-dark {!! !$recipient->read ? 'font-weight-bold' : ''!!}">
                                                     {{strlen($recipient->body) <= 20 ? $recipient->body : substr($recipient->body, 0, 20) . '...'}}
                                                 </a>
                                             </td>
-                                            <td>
+                                            <td class="hidden-xs">
                                                 <a href="{{route('messages.show', $recipient->id)}}" title="Leer más" class="btn btn-link text-dark {!! !$recipient->read ? 'font-weight-bold' : ''!!}">
                                                     {{$recipient->created_at}}
                                                 </a>
