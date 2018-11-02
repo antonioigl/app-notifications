@@ -25,7 +25,7 @@
 FROM php:7.2-apache
 
 RUN apt-get -qq update \
- && apt-get -qq -y install libmcrypt-dev git vim nano mysql-client bzip2 zlib1g-dev libmemcached-dev \
+ && apt-get -qq -y install libmcrypt-dev git vim nano zip unzip mysql-client bzip2 zlib1g-dev libmemcached-dev \
  && pecl install mcrypt-1.0.1 \
  && docker-php-ext-enable mcrypt \
  && docker-php-ext-install pdo_mysql \
