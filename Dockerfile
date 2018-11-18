@@ -18,7 +18,7 @@
 #
 # Open browser :
 # http://localhost:8081
-# or (configure local files add anunciostar.local to /etc/hosts)
+# or (configure local files add app-notifications.local to /etc/hosts)
 # http://app-notifications.local:8081
 #-----------------------------------------------------------------------
 
