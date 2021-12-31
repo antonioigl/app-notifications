@@ -13,4 +13,4 @@ Test Credentials:
     E-Mail Address: appnotifications_test2@email.com
     Password: 123456
 
-<a href="https://app-notifications.000webhostapp.com/login" target="_blank">Try here</a>
+<a href="https://appnotifications01.000webhostapp.com/login" target="_blank">Try here</a>
